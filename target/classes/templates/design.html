@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Design Your Taco!</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
   <h1>Design your taco</h1>
-  <form method="post" th:object="${taco}">
+  <img th:src="@{/images/TacoCloud.png}"/>
+  <form method="POST" th:object="${taco}">
     <span
       th:if="${#fields.hasErrors('ingredients')}"
       th:errors="*{ingredients}">Ingredient Error
@@ -16,6 +18,7 @@
     <div class="grid">
       <div class="ingredient-group" id="wraps">
         <h3>Designate your wrap:</h3>
+
         <div th:each="ingredient : ${wrap}">
           <input type="checkbox" th:value="${ingredient.id}"/>
           <span th:text="${ingredient.name}">INGREDIENT</span><br/>
@@ -48,9 +51,20 @@
           <input type="checkbox" th:value="${ingredient.id}"/>
           <span th:text="${ingredient.name}">INGREDIENT</span>
         </div>
+
+        <div>
+
+          <h3>Name Your taco creation:</h3>
+          <input type="text" th:field="*{name}"/>
+          <span class="validationError"
+                th:if="${#fields.hasErrors('name')}"
+                th:errors="*{name}">Name Error</span>
+          <br/>
+          <button>Submit your taco</button>
+        </div>
       </div>
-      <button type="submit" value="submit"/>
     </div>
+    <br/>
   </form>
 </body>
 </html>
