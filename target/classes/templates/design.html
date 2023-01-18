@@ -24,9 +24,9 @@
           <span th:text="${ingredient.name}">INGREDIENT</span><br/>
         </div>
       </div>
-      <div class="ingredient-group" id="protains">
-        <h3>Pick your protains:</h3>
-          <div th:each="ingredient : ${protain}">
+      <div class="ingredient-group" id="proteins">
+        <h3>Pick your proteins:</h3>
+          <div th:each="ingredient : ${protein}">
             <input type="checkbox" th:value="${ingredient.id}"/>
             <span th:text="${ingredient.name}">INGREDIENT</span>
           </div>
