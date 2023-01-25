@@ -1,5 +1,6 @@
 package tacos;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -13,12 +14,12 @@ import java.sql.Types;
 import java.util.Arrays;
 import java.util.Date;
 
+@Slf4j
 @Repository
 public class JdbcTacoRepository implements TacoRepository {
 
     private JdbcTemplate jdbc;
 
-    @Autowired
     public JdbcTacoRepository(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
