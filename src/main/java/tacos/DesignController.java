@@ -7,11 +7,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import tacos.Ingredient.Type;
+import tacos.data.IngredientRepository;
+import tacos.data.TacoRepository;
 
 import javax.validation.Valid;
 
@@ -22,22 +23,12 @@ public class DesignController {
 
     private final IngredientRepository ingredientRepo;
 
-    private final TacoRepository tacoRepo;
+    private TacoRepository tacoRepo;
 
     @Autowired
     public DesignController(IngredientRepository ingredientRepo, TacoRepository tacoRepo) {
         this.ingredientRepo = ingredientRepo;
         this.tacoRepo = tacoRepo;
-    }
-
-    @ModelAttribute(name = "order")
-    public Order order() {
-        return new Order();
-    }
-
-    @ModelAttribute(name = "taco")
-    public Taco taco() {
-        return new Taco();
     }
 
     @GetMapping
@@ -63,6 +54,16 @@ public class DesignController {
                 .collect(Collectors.toList());
     }
 
+    @ModelAttribute(name = "order")
+    public Order order() {
+        return new Order();
+    }
+
+    @ModelAttribute(name = "taco")
+    public Taco taco() {
+        return new Taco();
+    }
+
     @PostMapping
     public String preocessDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order) {
         if(errors.hasErrors()) {
@@ -71,6 +72,6 @@ public class DesignController {
         Taco saved = tacoRepo.save(design);
         order.addDesign(saved);
 
-        return "redirect:orders/currents";
+        return "redirect:/orders/currents";
     }
 }

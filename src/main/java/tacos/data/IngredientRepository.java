@@ -1,4 +1,6 @@
-package tacos;
+package tacos.data;
+
+import tacos.Ingredient;
 
 import java.util.List;
 
